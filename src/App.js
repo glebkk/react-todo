@@ -30,6 +30,7 @@ function App() {
   const [load, setLoad] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
   
+  //theme
   useEffect(() => {
     if(theme === "light") {
        document.documentElement.classList.remove("dark")
@@ -56,6 +57,7 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  //create todo
   const createTodo = async (e) => {
     e.preventDefault(e);
     if (input === "") {
@@ -74,10 +76,12 @@ function App() {
     setInput("");
   };
 
+  //delete todo
   const deleteTodo = async (id) => {
     await deleteDoc(doc(db, "todos", id));
   };
 
+  //toggle complete
   const toggleComplete = async (todo) => {
     await updateDoc(doc(db, "todos", todo.id), {
       completed: !todo.completed,
@@ -94,7 +98,7 @@ function App() {
           ) : (
             <BiMoon onClick={() => setTheme("light")} className="cursor-pointer text-slate-400" size={24} />
           )}
-          <a href="https://github.com/glebkk" target="_blank">
+          <a href="https://github.com/glebkk" target="_blank" rel="noreferrer">
             <AiFillGithub
               className="relative cursor-pointer text-slate-400"
               size={24}
